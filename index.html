@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emmanuel Feyisayo - Portfolio</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+
+        function Portfolio() {
+            const [dark, setDark] = useState(true);
+            const theme = dark ? "bg-gray-900 text-white" : "bg-gray-50 text-gray-900";
+
+            return (
+                <div className={`min-h-screen p-6 grid gap-6 transition-all ${theme}`}>
+                    {/* Header */}
+                    <div className="text-center">
+                        <h1 className="text-4xl font-bold">Emmanuel Feyisayo</h1>
+                        <p className="text-lg mt-2">Full-Stack Developer | AI Enthusiast</p>
+
+                        <div className="flex justify-center gap-4 mt-4">
+                            <button
+                                onClick={() => setDark(!dark)}
+                                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                            >
+                                Toggle {dark ? "Light" : "Dark"} Mode
+                            </button>
+
+                            <a
+                                href="/Emmanuel_Feyisayo_CV.pdf"
+                                download
+                                className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 inline-block"
+                            >
+                                Download CV
+                            </a>
+                        </div>
+                    </div>
+
+                    {/* About */}
+                    <div className="rounded-2xl shadow-md bg-white dark:bg-gray-800 p-6">
+                        <h2 className="text-2xl font-semibold mb-2">About Me</h2>
+                        <p>
+                            I am a Computer Science student passionate about building scalable
+                            web applications and integrating AI into real-world solutions.
+                        </p>
+                    </div>
+
+                    {/* Projects */}
+                    <div className="rounded-2xl shadow-md bg-white dark:bg-gray-800 p-6">
+                        <h2 className="text-2xl font-semibold mb-4">Projects</h2>
+                        <div className="grid md:grid-cols-2 gap-4">
+                            {[1, 2, 3].map((proj) => (
+                                <div
+                                    key={proj}
+                                    className="p-4 border rounded-xl hover:scale-105 transition-transform"
+                                >
+                                    <h3 className="font-bold">Project {proj}</h3>
+                                    <p>Full-stack app with APIs and deployment.</p>
+                                    <a
+                                        href="https://bck2-1.onrender.com"
+                                        target="_blank"
+                                        className="text-blue-400 hover:underline"
+                                    >
+                                        View Project
+                                    </a>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Skills */}
+                    <div className="rounded-2xl shadow-md bg-white dark:bg-gray-800 p-6">
+                        <h2 className="text-2xl font-semibold mb-2">Skills</h2>
+                        <p>HTML, CSS, JavaScript, Next.js, APIs, Git, Render</p>
+                    </div>
+
+                    {/* Contact Form */}
+                    <div className="rounded-2xl shadow-md bg-white dark:bg-gray-800 p-6">
+                        <h2 className="text-2xl font-semibold mb-4">Contact Me</h2>
+
+                        <form
+                            action="https://formspree.io/f/your-form-id"
+                            method="POST"
+                            className="grid gap-4"
+                        >
+                            <input
+                                type="text"
+                                name="name"
+                                placeholder="Your Name"
+                                required
+                                className="p-2 rounded border"
+                            />
+
+                            <input
+                                type="email"
+                                name="email"
+                                placeholder="Your Email"
+                                required
+                                className="p-2 rounded border"
+                            />
+
+                            <textarea
+                                name="message"
+                                placeholder="Your Message"
+                                required
+                                className="p-2 rounded border"
+                            />
+
+                            <button
+                                type="submit"
+                                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                            >
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+
+                    {/* Footer */}
+                    <p className="text-center text-sm opacity-70">
+                        © {new Date().getFullYear()} Emmanuel Feyisayo
+                    </p>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<Portfolio />, document.getElementById('root'));
+    </script>
+</body>
+
+</html>
