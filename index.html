@@ -1,145 +1,298 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Emmanuel Feyisayo - Portfolio</title>
-    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        :root {
+            --bg: #f8fafc;
+            --surface: #ffffff;
+            --surface-strong: #e2e8f0;
+            --text: #0f172a;
+            --muted: #475569;
+            --primary: #2563eb;
+            --accent: #16a34a;
+            --border: #cbd5e1;
+        }
+
         body {
             margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            min-height: 100vh;
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        body.dark {
+            --bg: #020617;
+            --surface: #0f172a;
+            --surface-strong: #111827;
+            --text: #f8fafc;
+            --muted: #94a3b8;
+            --border: #334155;
+        }
+
+        .page {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 32px 24px;
+            display: grid;
+            gap: 24px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .panel {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            box-shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+            padding: 32px;
+            overflow: hidden;
+            animation: slideUp 0.55s ease both;
+        }
+
+        .panel h2,
+        .panel h1,
+        .panel p,
+        .panel a,
+        .panel button,
+        .panel label {
+            color: inherit;
+        }
+
+        h1 {
+            font-size: clamp(2.75rem, 2vw + 1rem, 3.5rem);
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 1.625rem;
+            margin: 0 0 16px;
+        }
+
+        p {
+            line-height: 1.75;
+            margin: 0;
+        }
+
+        .muted {
+            color: var(--muted);
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            justify-content: center;
+            margin-top: 24px;
+        }
+
+        .button,
+        .link-button {
+            border: none;
+            cursor: pointer;
+            border-radius: 999px;
+            font-weight: 600;
+            transition: transform 0.22s ease, background-color 0.22s ease, box-shadow 0.22s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .button {
+            padding: 14px 22px;
+            background: var(--primary);
+            color: white;
+        }
+
+        .button:hover,
+        .link-button:hover {
+            transform: translateY(-1px);
+        }
+
+        .link-button {
+            padding: 14px 22px;
+            background: var(--accent);
+            color: white;
+        }
+
+        .grid-2 {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 24px;
+            box-shadow: 0 18px 50px rgba(15, 23, 42, 0.05);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 22px 60px rgba(15, 23, 42, 0.12);
+        }
+
+        .card-title {
+            font-size: 1.125rem;
+            margin: 0 0 10px;
+        }
+
+        .card-text {
+            margin: 0 0 18px;
+            color: var(--muted);
+        }
+
+        .project-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .project-link:hover {
+            text-decoration: underline;
+        }
+
+        .form-grid {
+            display: grid;
+            gap: 16px;
+        }
+
+        .form-field {
+            width: 100%;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 14px 16px;
+            background: var(--bg);
+            color: var(--text);
+            font: inherit;
+        }
+
+        .form-field:focus {
+            outline: 2px solid rgba(37, 99, 235, 0.24);
+            outline-offset: 2px;
+        }
+
+        .footer {
+            text-align: center;
+            color: var(--muted);
+            margin: 0;
+            animation: fadeIn 0.7s ease both;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(14px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .page {
+                padding: 20px 16px;
+            }
+
+            .panel {
+                padding: 24px;
+            }
         }
     </style>
 </head>
 
-<body>
-    <div id="root"></div>
+<body class="dark">
+    <main class="page">
+        <section class="panel" style="animation-delay: 0s;">
+            <h1>Emmanuel Feyisayo</h1>
+            <p class="muted">Full-Stack Developer | AI Enthusiast</p>
+            <div class="actions">
+                <button class="button" id="theme-toggle" type="button">Toggle Light Mode</button>
+                <a href="Emmanuel_Feyisayo_CV.pdf" download class="link-button">Download CV</a>
+            </div>
+        </section>
 
-    <script type="text/babel">
-        const { useState } = React;
+        <section class="panel" style="animation-delay: 0.1s;">
+            <h2>About Me</h2>
+            <p>I am a Computer Science student passionate about building scalable web applications and integrating AI into real-world solutions.</p>
+        </section>
 
-        function Portfolio() {
-            const [dark, setDark] = useState(true);
-            const theme = dark ? "bg-gray-900 text-white" : "bg-gray-50 text-gray-900";
+        <section class="panel" style="animation-delay: 0.2s;">
+            <h2>Projects</h2>
+            <div class="grid-2">
+                <article class="card">
+                    <h3 class="card-title">Project 1</h3>
+                    <p class="card-text">Full-stack app with APIs and deployment.</p>
+                    <a href="https://bck2-1.onrender.com" target="_blank" class="project-link">View Project</a>
+                </article>
+                <article class="card">
+                    <h3 class="card-title">Project 2</h3>
+                    <p class="card-text">Responsive web application with modern UI.</p>
+                    <a href="https://bck2-1.onrender.com" target="_blank" class="project-link">View Project</a>
+                </article>
+                <article class="card">
+                    <h3 class="card-title">Project 3</h3>
+                    <p class="card-text">API-driven platform built for real-world use.</p>
+                    <a href="https://bck2-1.onrender.com" target="_blank" class="project-link">View Project</a>
+                </article>
+            </div>
+        </section>
 
-            return (
-                <div className={`min-h-screen p-6 grid gap-6 transition-all ${theme}`}>
-                    {/* Header */}
-                    <div className="text-center">
-                        <h1 className="text-4xl font-bold">Emmanuel Feyisayo</h1>
-                        <p className="text-lg mt-2">Full-Stack Developer | AI Enthusiast</p>
+        <section class="panel" style="animation-delay: 0.3s;">
+            <h2>Skills</h2>
+            <p class="muted">HTML, CSS, JavaScript, Next.js, APIs, Git, Render</p>
+        </section>
 
-                        <div className="flex justify-center gap-4 mt-4">
-                            <button
-                                onClick={() => setDark(!dark)}
-                                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-                            >
-                                Toggle {dark ? "Light" : "Dark"} Mode
-                            </button>
+        <section class="panel" style="animation-delay: 0.4s;">
+            <h2>Contact Me</h2>
+            <form class="form-grid" action="https://formspree.io/f/your-form-id" method="POST">
+                <input class="form-field" type="text" name="name" placeholder="Your Name" required>
+                <input class="form-field" type="email" name="email" placeholder="Your Email" required>
+                <textarea class="form-field" name="message" placeholder="Your Message" rows="5" required></textarea>
+                <button class="button" type="submit">Send Message</button>
+            </form>
+        </section>
 
-                            <a
-                                href="/Emmanuel_Feyisayo_CV.pdf"
-                                download
-                                className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 inline-block"
-                            >
-                                Download CV
-                            </a>
-                        </div>
-                    </div>
+        <p class="footer"> <span id="year"></span> Emmanuel Feyisayo</p>
+    </main>
 
-                    {/* About */}
-                    <div className="rounded-2xl shadow-md bg-white dark:bg-gray-800 p-6">
-                        <h2 className="text-2xl font-semibold mb-2">About Me</h2>
-                        <p>
-                            I am a Computer Science student passionate about building scalable
-                            web applications and integrating AI into real-world solutions.
-                        </p>
-                    </div>
+    <script>
+        const body = document.body;
+        const themeToggle = document.getElementById('theme-toggle');
+        const year = document.getElementById('year');
 
-                    {/* Projects */}
-                    <div className="rounded-2xl shadow-md bg-white dark:bg-gray-800 p-6">
-                        <h2 className="text-2xl font-semibold mb-4">Projects</h2>
-                        <div className="grid md:grid-cols-2 gap-4">
-                            {[1, 2, 3].map((proj) => (
-                                <div
-                                    key={proj}
-                                    className="p-4 border rounded-xl hover:scale-105 transition-transform"
-                                >
-                                    <h3 className="font-bold">Project {proj}</h3>
-                                    <p>Full-stack app with APIs and deployment.</p>
-                                    <a
-                                        href="https://bck2-1.onrender.com"
-                                        target="_blank"
-                                        className="text-blue-400 hover:underline"
-                                    >
-                                        View Project
-                                    </a>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
+        year.textContent = new Date().getFullYear();
 
-                    {/* Skills */}
-                    <div className="rounded-2xl shadow-md bg-white dark:bg-gray-800 p-6">
-                        <h2 className="text-2xl font-semibold mb-2">Skills</h2>
-                        <p>HTML, CSS, JavaScript, Next.js, APIs, Git, Render</p>
-                    </div>
-
-                    {/* Contact Form */}
-                    <div className="rounded-2xl shadow-md bg-white dark:bg-gray-800 p-6">
-                        <h2 className="text-2xl font-semibold mb-4">Contact Me</h2>
-
-                        <form
-                            action="https://formspree.io/f/your-form-id"
-                            method="POST"
-                            className="grid gap-4"
-                        >
-                            <input
-                                type="text"
-                                name="name"
-                                placeholder="Your Name"
-                                required
-                                className="p-2 rounded border"
-                            />
-
-                            <input
-                                type="email"
-                                name="email"
-                                placeholder="Your Email"
-                                required
-                                className="p-2 rounded border"
-                            />
-
-                            <textarea
-                                name="message"
-                                placeholder="Your Message"
-                                required
-                                className="p-2 rounded border"
-                            />
-
-                            <button
-                                type="submit"
-                                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-                            >
-                                Send Message
-                            </button>
-                        </form>
-                    </div>
-
-                    {/* Footer */}
-                    <p className="text-center text-sm opacity-70">
-                        © {new Date().getFullYear()} Emmanuel Feyisayo
-                    </p>
-                </div>
-            );
+        function setTheme(isDark) {
+            body.classList.toggle('dark', isDark);
+            themeToggle.textContent = isDark ? 'Toggle Light Mode' : 'Toggle Dark Mode';
         }
 
-        ReactDOM.render(<Portfolio />, document.getElementById('root'));
+        themeToggle.addEventListener('click', () => {
+            setTheme(!body.classList.contains('dark'));
+        });
+
+        setTheme(true);
     </script>
 </body>
 
