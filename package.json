@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "echo 'No build required for static HTML'"
+    "build": "echo 'No build required for static HTML'",
+    "start": "node server.js"
   },
   "dependencies": {
     "framer-motion": "^12.38.0"
