@@ -1,298 +1,842 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emmanuel Feyisayo - Portfolio</title>
+    <title>Emmanuel Feyisayo - Full-Stack Software Engineer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <style>
         :root {
-            --bg: #f8fafc;
-            --surface: #ffffff;
-            --surface-strong: #e2e8f0;
-            --text: #0f172a;
-            --muted: #475569;
+            /* Light Theme */
+            --bg-main: #f8fafc;
+            --bg-surface: #ffffff;
+            --bg-surface-hover: #f1f5f9;
+            --text-main: #0f172a;
+            --text-muted: #475569;
             --primary: #2563eb;
-            --accent: #16a34a;
-            --border: #cbd5e1;
-        }
-
-        body {
-            margin: 0;
-            min-height: 100vh;
-            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: var(--bg);
-            color: var(--text);
+            --primary-hover: #1d4ed8;
+            --accent: #10b981;
+            --accent-hover: #059669;
+            --border: #e2e8f0;
+            --glass-bg: rgba(255, 255, 255, 0.8);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
         }
 
         body.dark {
-            --bg: #020617;
-            --surface: #0f172a;
-            --surface-strong: #111827;
-            --text: #f8fafc;
-            --muted: #94a3b8;
-            --border: #334155;
+            /* Dark Theme */
+            --bg-main: #020617;
+            --bg-surface: #0f172a;
+            --bg-surface-hover: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --primary: #3b82f6;
+            --primary-hover: #60a5fa;
+            --accent: #10b981;
+            --accent-hover: #34d399;
+            --border: #1e293b;
+            --glass-bg: rgba(15, 23, 42, 0.85);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
         }
 
-        .page {
-            max-width: 1120px;
-            margin: 0 auto;
-            padding: 32px 24px;
-            display: grid;
-            gap: 24px;
-            animation: fadeIn 0.5s ease;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
-        .panel {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            box-shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
-            padding: 32px;
-            overflow: hidden;
-            animation: slideUp 0.55s ease both;
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        .panel h2,
-        .panel h1,
-        .panel p,
-        .panel a,
-        .panel button,
-        .panel label {
-            color: inherit;
+        /* Typography */
+        h1,
+        h2,
+        h3,
+        h4 {
+            color: var(--text-main);
+            line-height: 1.2;
         }
 
         h1 {
-            font-size: clamp(2.75rem, 2vw + 1rem, 3.5rem);
-            margin: 0;
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
         }
 
         h2 {
-            font-size: 1.625rem;
-            margin: 0 0 16px;
+            font-size: clamp(2rem, 3vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 2rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
         }
 
         p {
-            line-height: 1.75;
-            margin: 0;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
         }
 
-        .muted {
-            color: var(--muted);
+        a {
+            text-decoration: none;
+            color: var(--primary);
+            transition: color 0.2s;
         }
 
-        .actions {
+        a:hover {
+            color: var(--primary-hover);
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 6rem 0;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+            padding: 1rem 0;
+        }
+
+        .nav-content {
             display: flex;
-            flex-wrap: wrap;
-            gap: 14px;
-            justify-content: center;
-            margin-top: 24px;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .button,
-        .link-button {
-            border: none;
-            cursor: pointer;
-            border-radius: 999px;
-            font-weight: 600;
-            transition: transform 0.22s ease, background-color 0.22s ease, box-shadow 0.22s ease;
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Buttons */
+        .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            text-decoration: none;
-        }
-
-        .button {
-            padding: 14px 22px;
-            background: var(--primary);
-            color: white;
-        }
-
-        .button:hover,
-        .link-button:hover {
-            transform: translateY(-1px);
-        }
-
-        .link-button {
-            padding: 14px 22px;
-            background: var(--accent);
-            color: white;
-        }
-
-        .grid-2 {
-            display: grid;
-            gap: 20px;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        }
-
-        .card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 24px;
-            box-shadow: 0 18px 50px rgba(15, 23, 42, 0.05);
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 22px 60px rgba(15, 23, 42, 0.12);
-        }
-
-        .card-title {
-            font-size: 1.125rem;
-            margin: 0 0 10px;
-        }
-
-        .card-text {
-            margin: 0 0 18px;
-            color: var(--muted);
-        }
-
-        .project-link {
-            color: var(--primary);
-            text-decoration: none;
+            padding: 0.875rem 1.75rem;
+            border-radius: 9999px;
             font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            gap: 0.5rem;
         }
 
-        .project-link:hover {
-            text-decoration: underline;
+        .btn-primary {
+            background-color: var(--primary);
+            color: white !important;
+            box-shadow: var(--shadow-md);
         }
 
-        .form-grid {
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--text-main) !important;
+            border: 2px solid var(--border);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 5rem;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--accent);
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .badge::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--accent);
+            margin-right: 0.5rem;
+            animation: pulse 2s infinite;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2.5rem;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
             display: grid;
-            gap: 16px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 4rem;
+            padding-top: 4rem;
+            border-top: 1px solid var(--border);
         }
 
-        .form-field {
-            width: 100%;
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 14px 16px;
-            background: var(--bg);
-            color: var(--text);
-            font: inherit;
-        }
-
-        .form-field:focus {
-            outline: 2px solid rgba(37, 99, 235, 0.24);
-            outline-offset: 2px;
-        }
-
-        .footer {
+        .stat-card {
             text-align: center;
-            color: var(--muted);
-            margin: 0;
-            animation: fadeIn 0.7s ease both;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(14px);
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Skills & Tech */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: var(--bg-surface);
+            padding: 2rem;
+            border-radius: 1.5rem;
+            border: 1px solid var(--border);
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .tech-tag {
+            padding: 0.4rem 1rem;
+            background: var(--bg-main);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+
+        .project-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .project-image {
+            width: 100%;
+            height: auto;
+            max-height: 350px;
+            background: var(--bg-main);
+            border-radius: 1rem;
+            border: 1px solid var(--border);
+            object-fit: cover;
+        }
+
+        .project-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .project-features {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .project-features li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+        }
+
+        .project-features li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        /* Timeline / Experience */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background: var(--border);
+            top: 0;
+            bottom: 0;
+            left: 20px;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 14px;
+            top: 5px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 4px solid var(--bg-main);
+        }
+
+        .timeline-date {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Forms & Contact */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+        }
+
+        .contact-info div {
+            margin-bottom: 2rem;
+        }
+
+        .contact-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 1rem;
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            color: var(--text-main);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-surface);
+            padding: 4rem 0 2rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+
+            70% {
+                box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
             }
         }
 
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(16px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
         }
 
-        @media (max-width: 640px) {
-            .page {
-                padding: 20px 16px;
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+
+            .project-card,
+            .contact-grid {
+                grid-template-columns: 1fr;
             }
 
-            .panel {
-                padding: 24px;
+            .nav-links {
+                display: none;
+            }
+
+            /* Add hamburger menu logic for mobile if needed */
+            section {
+                padding: 4rem 0;
             }
         }
     </style>
 </head>
 
 <body class="dark">
-    <main class="page">
-        <section class="panel" style="animation-delay: 0s;">
-            <h1>Emmanuel Feyisayo</h1>
-            <p class="muted">Full-Stack Developer | AI Enthusiast</p>
-            <div class="actions">
-                <button class="button" id="theme-toggle" type="button">Toggle Light Mode</button>
-                <a href="EMMANUEL FEYISAYO CV.docx" download class="link-button">Download CV</a>
+
+    <nav>
+        <div class="container nav-content">
+            <a href="#" style="font-weight: 800; font-size: 1.25rem; color: var(--text-main);">EF.</a>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#projects">Work</a>
+                <a href="#experience">Experience</a>
+                <a href="#contact">Contact</a>
+                <button id="theme-toggle" class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.875rem;">
+                    Toggle Theme
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="container">
+                <div class="fade-in">
+                    <span class="badge">Open to Remote Work & Internships</span>
+                    <h1 style="margin-bottom: 1.5rem;">Emmanuel Feyisayo</h1>
+                    <h2 style="color: var(--primary); font-size: clamp(1.5rem, 2.5vw, 2rem);">Full-Stack Software
+                        Engineer</h2>
+
+                    <p style="max-width: 600px; font-size: 1.25rem; margin-bottom: 2rem;">
+                        I build scalable web applications using Next.js, Node.js, PostgreSQL, and modern cloud
+                        technologies.
+                        Specializing in secure APIs, dashboards, authentication systems, and high-performance platforms.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a href="#projects" class="btn btn-primary">View My Work</a>
+                        <a href="EMMANUEL_FEYISAYO_CV.pdf" class="btn btn-outline">Download CV</a>
+                        <a href="https://github.com/emmaexcels07-maker" target="_blank"
+                            class="btn btn-outline">GitHub</a>
+                    </div>
+                </div>
+
+                <div class="stats-grid fade-in">
+                    <div class="stat-card">
+                        <div class="stat-number">10+</div>
+                        <p>Projects Completed</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">4+</div>
+                        <p>Full Stack Apps</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">250+</div>
+                        <p>GitHub Contributions</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">2027</div>
+                        <p>Expected Graduation</p>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <section class="panel" style="animation-delay: 0.1s;">
-            <h2>About Me</h2>
-            <p>I am a Computer Science student passionate about building scalable web applications and integrating AI into real-world solutions.</p>
-        </section>
+        <!-- About & Skills Section -->
+        <section id="about" style="background: var(--bg-surface-hover);">
+            <div class="container fade-in">
+                <h2>Engineering Robust Solutions</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 4rem;">
+                    <div>
+                        <p>
+                            I'm Emmanuel Feyisayo, a Computer Science undergraduate and Full-Stack Developer based in
+                            Lagos, Nigeria.
+                        </p>
+                        <p>
+                            I specialize in designing and building scalable web applications using <strong>Next.js,
+                                React, Node.js, Express, PostgreSQL</strong>, and modern backend technologies.
+                        </p>
+                        <p>
+                            My focus is creating secure, high-performance applications that solve real business
+                            problems—from handling API edge cases and fixing 404 deployment errors to building complete
+                            e-commerce and communication platforms.
+                        </p>
+                        <p>
+                            Currently expanding my expertise in cloud technologies, C#, ASP.NET Core, and system
+                            architecture to build systems that scale.
+                        </p>
+                    </div>
 
-        <section class="panel" style="animation-delay: 0.2s;">
-            <h2>Projects</h2>
-            <div class="grid-2">
-                <article class="card">
-                    <h3 class="card-title">Project 1</h3>
-                    <p class="card-text">Full-stack app with APIs and deployment.</p>
-                    <a href="https://bck2-1.onrender.com" target="_blank" class="project-link">View Project</a>
-                </article>
-                <article class="card">
-                    <h3 class="card-title">Project 2</h3>
-                    <p class="card-text">Responsive web application with modern UI.</p>
-                    <a href="https://bck2-1.onrender.com" target="_blank" class="project-link">View Project</a>
-                </article>
-                <article class="card">
-                    <h3 class="card-title">Project 3</h3>
-                    <p class="card-text">API-driven platform built for real-world use.</p>
-                    <a href="https://bck2-1.onrender.com" target="_blank" class="project-link">View Project</a>
-                </article>
+                    <div class="skills-grid">
+                        <div class="skill-category">
+                            <h3>Frontend</h3>
+                            <div class="tech-tags">
+                                <span class="tech-tag">React</span>
+                                <span class="tech-tag">Next.js</span>
+                                <span class="tech-tag">Tailwind CSS</span>
+                                <span class="tech-tag">JavaScript / DOM</span>
+                                <span class="tech-tag">Chart.js / Recharts</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h3>Backend & DB</h3>
+                            <div class="tech-tags">
+                                <span class="tech-tag">Node.js</span>
+                                <span class="tech-tag">Express.js</span>
+                                <span class="tech-tag">PostgreSQL</span>
+                                <span class="tech-tag">REST APIs</span>
+                                <span class="tech-tag">JWT Auth</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <section class="panel" style="animation-delay: 0.3s;">
-            <h2>Skills</h2>
-            <p class="muted">HTML, CSS, JavaScript, Next.js, APIs, Git, Render</p>
+        <!-- Featured Projects Section -->
+        <section id="projects">
+            <div class="container">
+                <h2 class="fade-in">Featured Case Studies</h2>
+                <div class="projects-grid">
+
+                    <!-- Project 1 -->
+                    <article class="project-card fade-in">
+                        <img src="2026-07-17 16_39_47-.png" alt="NextShop" class="project-image">
+                        <div class="project-content">
+                            <h3>NextShop - E-commerce Platform</h3>
+                            <div class="tech-tags" style="margin-top: 0;">
+                                <span class="tech-tag">Next.js</span>
+                                <span class="tech-tag">Node.js</span>
+                                <span class="tech-tag">PostgreSQL</span>
+                                <span class="tech-tag">Render</span>
+                            </div>
+                            <ul class="project-features">
+                                <li><strong>Problem:</strong> Needed a scalable storefront handling complex routing and
+                                    user sessions.</li>
+                                <li><strong>Solution:</strong> Developed a full-stack platform with a secure admin
+                                    dashboard, dynamic product routing, and persistent shopping cart.</li>
+                                <li><strong>Challenge Overcome:</strong> Successfully debugged and resolved complex 404
+                                    endpoint routing errors during live production deployment on Render.</li>
+                            </ul>
+                            <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                                <a href="https://nextshop-5hj0.onrender.com" target="_blank"
+                                    class="btn btn-primary">Live Demo</a>
+                                <a href="https://github.com/emmaexcels07-maker" target="_blank"
+                                    class="btn btn-outline">GitHub</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card fade-in">
+                        <img src="2026-07-17 16_02_52-NextShop.png" alt="NextShop Project" class="project-image">
+                        <div class="project-content">
+                            <h3>Full-Stack E-commerce Platform</h3>
+                            <div class="tech-tags" style="margin-top: 0;">
+                                <span class="tech-tag">Next.js</span>
+                                <span class="tech-tag">Node.js</span>
+                                <span class="tech-tag">PostgreSQL</span>
+                                <span class="tech-tag">REST API</span>
+                            </div>
+                            <ul class="project-features">
+                                <li><strong>Core Features:</strong> Robust User Authentication, dedicated Admin
+                                    Dashboard, Product Management, and an interactive Shopping Cart.</li>
+                                <li><strong>Engineering Solution:</strong> Fully modular architectural structure
+                                    resolving complex production routing errors (404 optimization) over live Render
+                                    server layers.</li>
+                                <li><strong>Impact:</strong> Seamless data continuity between the REST endpoints and
+                                    frontend state.</li>
+                            </ul>
+                            <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                                <a href="https://bck2-1.onrender.com" target="_blank" class="btn btn-primary">Live
+                                    Demo</a>
+                                <a href="https://github.com/emmaexcels07-maker" target="_blank"
+                                    class="btn btn-outline">GitHub</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 2: Bank Platform -->
+                    <article class="project-card fade-in">
+                        <img src="2026-07-17 16_46_18-WaterBank - Your Friendly Banking App.png" alt="WaterBank Project" class="project-image">
+                        <div class="project-content">
+                            <h3>Full-Stack Bank Platform</h3>
+                            <div class="tech-tags" style="margin-top: 0;">
+                                <span class="tech-tag">React</span>
+                                <span class="tech-tag">Node.js</span>
+                                <span class="tech-tag">Express</span>
+                                <span class="tech-tag">UI/UX Design</span>
+                            </div>
+                            <ul class="project-features">
+                                <li><strong>Problem:</strong> Financial interfaces require absolute consistency across
+                                    multiple device layouts with clear state updates.</li>
+                                <li><strong>Solution:</strong> Engineered a highly responsive web application utilizing
+                                    a unified design structure to simulate banking transitions safely.</li>
+                                <li><strong>Architecture:</strong> Separated frontend presentational states from
+                                    asynchronous backend endpoints for secure state evaluation.</li>
+                            </ul>
+                            <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                                <a href="https://water-2qjh.onrender.com" target="_blank" class="btn btn-primary">Live
+                                    Demo</a>
+                                <a href="https://github.com/emmaexcels07-maker" target="_blank"
+                                    class="btn btn-outline">GitHub</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 3: Bioferox -->
+                    <article class="project-card fade-in">
+                         <img src="2026-07-17 16_45_43-Ravella Ultra Solution Organic Wine.png" alt="Ravella Project" class="project-image">
+                        <div class="project-content">
+                            <h3>E-commerce Landing Page (Ravella)</h3>
+                            <div class="tech-tags" style="margin-top: 0;">
+                                <span class="tech-tag">HTML5 / CSS3</span>
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag">API Integration</span>
+                            </div>
+                            <ul class="project-features">
+                                <li><strong>Purpose:</strong> Designed an organic wine interface geared for
+                                    real-world production use and high user conversion rates.</li>
+                                <li><strong>Optimization:</strong> Structured layout assets cleanly using semantic
+                                    markup for excellent performance and responsive constraints.</li>
+                                <li><strong>Data Flow:</strong> Structured to feed programmatic layout modules
+                                    dynamically through integrated API-driven components.</li>
+                            </ul>
+                            <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                                <a href="https://ravella-2cze.onrender.com/" target="_blank"
+                                    class="btn btn-primary">Live Demo</a>
+                                <a href="https://github.com/emmaexcels07-maker" target="_blank"
+                                    class="btn btn-outline">GitHub</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
         </section>
 
-        <section class="panel" style="animation-delay: 0.4s;">
-            <h2>Contact Me</h2>
-            <form class="form-grid" action="https://formspree.io/f/your-form-id" method="POST">
-                <input class="form-field" type="text" name="name" placeholder="Your Name" required>
-                <input class="form-field" type="email" name="email" placeholder="Your Email" required>
-                <textarea class="form-field" name="message" placeholder="Your Message" rows="5" required></textarea>
-                <button class="button" type="submit">Send Message</button>
-            </form>
+        <!-- Experience Timeline Section -->
+        <section id="experience" style="background: var(--bg-surface-hover);">
+            <div class="container">
+                <h2 class="fade-in">My Journey</h2>
+                <div class="timeline fade-in">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">2026 - Present</div>
+                        <h3>Full-Stack Architect & Independent Developer</h3>
+                        <p>Building complex systems like NextShop and Shadow. Architecting REST APIs, handling advanced
+                            frontend state management, resolving production server routing (404/500 errors), and
+                            integrating external data (TMDB).</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">2025 - 2026</div>
+                        <h3>Frontend Developer</h3>
+                        <p>Focused intensely on modern UI development. Mastered React component architecture, built
+                            data-heavy business analytics dashboards, and integrated charting libraries (Chart.js,
+                            Recharts).</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">2024</div>
+                        <h3>Began Software Engineering Journey</h3>
+                        <p>Commenced Computer Science studies. Built a strong foundation in HTML, CSS, core JavaScript,
+                            and the principles of algorithmic problem-solving.</p>
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <p class="footer"> <span id="year"></span> Emmanuel Feyisayo</p>
+        <!-- Contact Section -->
+        <section id="contact">
+            <div class="container fade-in">
+                <h2>Let's Build Something Great</h2>
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <div>
+                            <h4>Location</h4>
+                            <p>Lagos, Nigeria (Available for Remote Work worldwide)</p>
+                        </div>
+                        <div>
+                            <h4>Email</h4>
+                            <a href="mailto:emmaexcels07@gmail.com">emmaexcels07@gmail.com</a>
+                        </div>
+                        <div>
+                            <h4>Services</h4>
+                            <p>Full-Stack Development • API Design • UI/UX Implementation • Bug Fixing & Optimization
+                            </p>
+                        </div>
+                    </div>
+
+                    <form action="https://formspree.io/f/xjgqoraa" method="POST" class="contact-form">
+                        <div class="form-group">
+                            <label for="name" style="display:block; margin-bottom:0.5rem; font-weight:500;">Name</label>
+                            <input type="text" id="name" name="name" required placeholder="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label for="email"
+                                style="display:block; margin-bottom:0.5rem; font-weight:500;">Email</label>
+                            <input type="email" id="email" name="email" required placeholder="john@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="message"
+                                style="display:block; margin-bottom:0.5rem; font-weight:500;">Message</label>
+                            <textarea id="message" name="message" required
+                                placeholder="Tell me about your project..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
     </main>
 
+    <footer>
+        <div class="container">
+            <h3 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem;">Emmanuel Feyisayo</h3>
+            <p>Building modern software that solves real-world problems.</p>
+            <div class="footer-links">
+                <a href="https://github.com/emmaexcels07-maker" target="_blank">GitHub</a>
+                <a href="#">LinkedIn</a>
+                <a href="mailto:emmaexcels07@gmail.com">Email</a>
+            </div>
+            <p style="font-size: 0.875rem; color: var(--text-muted);">
+                &copy; <span id="year"></span> Emmanuel Feyisayo. All Rights Reserved.
+            </p>
+        </div>
+    </footer>
+
     <script>
-        const body = document.body;
+        // Set dynamic year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Theme Toggle Logic
         const themeToggle = document.getElementById('theme-toggle');
-        const year = document.getElementById('year');
-
-        year.textContent = new Date().getFullYear();
-
-        function setTheme(isDark) {
-            body.classList.toggle('dark', isDark);
-            themeToggle.textContent = isDark ? 'Toggle Light Mode' : 'Toggle Dark Mode';
-        }
+        const body = document.body;
 
         themeToggle.addEventListener('click', () => {
-            setTheme(!body.classList.contains('dark'));
+            body.classList.toggle('dark');
+            // Update button text conditionally if desired, but "Toggle Theme" works universally
         });
 
-        setTheme(true);
+        // Intersection Observer for Scroll Animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // Run animation once
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(element => {
+            observer.observe(element);
+        });
     </script>
 </body>
 

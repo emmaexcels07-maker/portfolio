@@ -1,0 +1,70 @@
+ <!-- Project 2 -->
+                    <article class="project-card fade-in">
+                        <div style="background: #0f172a; border-radius: 1rem; display:flex; align-items:center; justify-content:center; min-height:300px; color:white; font-weight:bold; font-size: 1.5rem;">
+                            MovieBox UI
+                        </div>
+                        <div class="project-content">
+                            <h3>MovieBox - Media Discovery App</h3>
+                            <div class="tech-tags" style="margin-top: 0;">
+                                <span class="tech-tag">React</span>
+                                <span class="tech-tag">React Router</span>
+                                <span class="tech-tag">Tailwind CSS</span>
+                                <span class="tech-tag">TMDB API</span>
+                            </div>
+                            <ul class="project-features">
+                                <li><strong>Architecture:</strong> Built a dynamic Single Page Application for media discovery.</li>
+                                <li><strong>Integration:</strong> Seamlessly connected to the TMDB external REST API for real-time data fetching and search functionality.</li>
+                                <li><strong>UI/UX:</strong> Implemented a highly responsive, modern interface using Tailwind CSS utility classes.</li>
+                            </ul>
+                            <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                                <a href="#" class="btn btn-outline">Case Study</a>
+                                <a href="#" class="btn btn-outline">GitHub</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 3 -->
+                    <article class="project-card fade-in">
+                        <div style="background: #334155; border-radius: 1rem; display:flex; align-items:center; justify-content:center; min-height:300px; color:white; font-weight:bold; font-size: 1.5rem;">
+                            Shadow Comms App
+                        </div>
+                        <div class="project-content">
+                            <h3>Shadow - Messaging Platform</h3>
+                            <div class="tech-tags" style="margin-top: 0;">
+                                <span class="tech-tag">React</span>
+                                <span class="tech-tag">WebSockets</span>
+                                <span class="tech-tag">UI/UX Design</span>
+                            </div>
+                            <ul class="project-features">
+                                <li><strong>Vision:</strong> Designed a professional, trustworthy, modern, and premium free communication application.</li>
+                                <li><strong>Features:</strong> Architected for text messaging and real-time video calling capabilities.</li>
+                                <li><strong>Focus:</strong> Prioritized a premium user interface to build trust and ensure seamless user onboarding.</li>
+                            </ul>
+                            <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                                <a href="#" class="btn btn-outline">Architecture Review</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 4 -->
+                    <article class="project-card fade-in">
+                        <div style="background: #1e293b; border-radius: 1rem; display:flex; align-items:center; justify-content:center; min-height:300px; color:white; font-weight:bold; font-size: 1.5rem;">
+                            Business Dashboard
+                        </div>
+                        <div class="project-content">
+                            <h3>Business Analytics Dashboard</h3>
+                            <div class="tech-tags" style="margin-top: 0;">
+                                <span class="tech-tag">React</span>
+                                <span class="tech-tag">Chart.js / Recharts</span>
+                                <span class="tech-tag">API Handling</span>
+                            </div>
+                            <ul class="project-features">
+                                <li><strong>Data Visualization:</strong> Integrated charting libraries to represent complex business metrics intuitively.</li>
+                                <li><strong>Structure:</strong> Designed a highly modular component architecture for maintainability and scalability.</li>
+                                <li><strong>Data Flow:</strong> Engineered robust API handling to ensure seamless asynchronous data updates across the dashboard state.</li>
+                            </ul>
+                            <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                                <a href="#" class="btn btn-outline">View Details</a>
+                            </div>
+                        </div>
+                    </article>
